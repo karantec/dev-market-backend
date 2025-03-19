@@ -95,6 +95,19 @@ const createModalData = async (req, res) => {
     }
 };
 
+const getAllModalData = async (req, res) => {
+    try {
+        const modalDataList = await ModalData.find();
+        res.status(200).json({
+            success: true,
+            data: modalDataList
+        });
+    } catch (error) {
+        console.error('Fetch Error:', error);
+        res.status(500).json({ success: false, error: 'Failed to fetch all data', details: error.message });
+    }
+};
+
 const updateModalData = async (req, res) => {
     try {
         const { id } = req.params;
@@ -247,6 +260,7 @@ module.exports = {
     createModalData,
     updateModalData,
     deleteModalData,
+    getAllModalData,
     getModalData,
     getModalDataById
 };
